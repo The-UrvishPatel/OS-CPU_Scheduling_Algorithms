@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+    
+    <link rel="stylesheet" href="./style.css">
+
+    <title>CPU Scheduling Algos</title>
+
+  </head>
+  <body>
+
+    <div class="title">
+        <h1>SchedX</h1>
+        <div class="github">
+            <ion-icon name="logo-github" class="icon"></ion-icon>
+            <a href="#">Github</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="form-container">
+            <form class="scheduling-form">
+                <div class="line">
+                    <label for="scheduling">Choose Scheduling Algorithm</label>
+                    <select name="scheduling" id="scheduling" class="input">
+                        <option value="fcfs" selected>FCFS</option>
+                        <option value="sjf">Shortest Job First</option>
+                        <option value="rr">Round Robin</option>
+                        <option value="ps">Priority Scheduling</option>
+                        <option value="srtf">Shortest Remaining Time First</option>
+                        <option value="lrtf">Largest Remaining Time First</option>
+                    </select>
+                </div>
+
+                <div class="line">
+                    <label for="pid">Enter Process IDs</label>
+                    <input type="text" name="pid" id="pid" class="input">
+                </div>
+                
+                <div class="line">
+                    <label for="arrival">Enter Arrival Times</label>
+                    <input type="text" name="arrival" id="arrival" class="input">
+                </div>
+                
+                <div class="line">
+                    <label for="burst">Enter Burst Times</label>
+                    <input type="text" name="burst" id="burst" class="input">
+                </div>
+                
+                <div class="line">
+                    <label for="priority">Enter Priorities</label>
+                    <input type="text" name="priority" id="priority" class="input">
+                </div>
+                
+                <div class="line">
+                    <label for="quanta">Enter Time Quanta for Round Robin</label>
+                    <input type="text" name="quanta" id="quanta" class="input">
+                </div>
+
+                <button type="submit" class="btn">Get Answer!</button>
+
+            </form>
+        </div>
+
+
+        <div class="answer-container">
+
+            <div class="answer">
+                
+            </div>
+
+        </div>
+    </div>
+
+    <!-- axios -->
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+      integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    >
+    </script>
+
+    <script src="logic.js"></script>
+  
+</body>
+</html>
