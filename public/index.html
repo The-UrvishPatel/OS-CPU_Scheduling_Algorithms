@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
     
+    <link rel="shortcut icon" href="./logo/favicon.ico" type="image/x-icon"/>
+
     <link rel="stylesheet" href="./style.css">
 
     <title>CPU Scheduling Algos</title>
@@ -13,130 +15,133 @@
   </head>
   <body>
 
-    <div class="title">
-        <h1>SchedX</h1>
-        <div class="github">
-            <ion-icon name="logo-github" class="icon"></ion-icon>
-            <a href="#">Github</a>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="form-container">
-            <form class="scheduling-form">
-                <div class="line">
-                    <label for="scheduling">Choose Scheduling Algorithm</label>
-                    <select name="scheduling" id="scheduling" class="input">
-                        <option value="fcfs" selected>FCFS</option>
-                        <option value="sjf">Shortest Job First</option>
-                        <option value="rr">Round Robin</option>
-                        <option value="ps">Priority Scheduling</option>
-                        <option value="srtf">Shortest Remaining Time First</option>
-                        <option value="lrtf">Largest Remaining Time First</option>
-                    </select>
-                </div>
-
-                <div class="line">
-                    <label for="pid">Enter Process IDs</label>
-                    <input type="text" name="pid" id="pid" class="input">
-                </div>
-                
-                <div class="line">
-                    <label for="arrival">Enter Arrival Times</label>
-                    <input type="text" name="arrival" id="arrival" class="input">
-                </div>
-                
-                <div class="line">
-                    <label for="burst">Enter Burst Times</label>
-                    <input type="text" name="burst" id="burst" class="input">
-                </div>
-                
-                <div class="line">
-                    <label for="priority">Enter Priorities</label>
-                    <input type="text" name="priority" id="priority" class="input">
-                </div>
-                
-                <div class="line">
-                    <label for="quanta">Enter Time Quanta for Round Robin</label>
-                    <input type="text" name="quanta" id="quanta" class="input">
-                </div>
-
-                <button type="submit" class="btn">Get Answer!</button>
-
-            </form>
+    <div class="all-container">
+        <div class="title">
+            <h1>SchedX</h1>
+            <div class="github">
+                <ion-icon name="logo-github" class="icon"></ion-icon>
+                <a href="#">Github</a>
+            </div>
         </div>
 
+        <div class="container">
+            <div class="form-container">
+                <form class="scheduling-form">
+                    <div class="line">
+                        <label for="scheduling">Choose Scheduling Algorithm</label>
+                        <select name="scheduling" id="scheduling" class="input">
+                            <option value="fcfs" selected>FCFS</option>
+                            <option value="sjf">Shortest Job First</option>
+                            <option value="rr">Round Robin</option>
+                            <option value="ps">Priority Scheduling</option>
+                            <option value="srtf">Shortest Remaining Time First</option>
+                            <option value="lrtf">Largest Remaining Time First</option>
+                        </select>
+                    </div>
 
-        <div class="answer-container">
+                    <div class="line">
+                        <label for="pid">Enter Process IDs</label>
+                        <input type="text" name="pid" id="pid" class="input">
+                    </div>
+                    
+                    <div class="line">
+                        <label for="arrival">Enter Arrival Times</label>
+                        <input type="text" name="arrival" id="arrival" class="input">
+                    </div>
+                    
+                    <div class="line">
+                        <label for="burst">Enter Burst Times</label>
+                        <input type="text" name="burst" id="burst" class="input">
+                    </div>
+                    
+                    <div class="line">
+                        <label for="priority">Enter Priorities</label>
+                        <input type="text" name="priority" id="priority" class="input">
+                    </div>
+                    
+                    <div class="line">
+                        <label for="quanta">Enter Time Quanta for Round Robin</label>
+                        <input type="text" name="quanta" id="quanta" class="input">
+                    </div>
 
-            <h1 class="title">Answer</h1>
+                    <button type="submit" class="btn">Get Answer!</button>
 
-            <div class="error"></div>
-
-
-            <div class="answer">
-
-                <div class="table-container">
-
-                        <table class="table">
-
-                            <thead class="header row">
-                                <th class="content">Process&nbsp;IDs</th>
-                                <th class="content">Arrival&nbsp;Time</th>
-                                <th class="content">Burst&nbsp;Time</th>
-                                <th class="content">Priorities</th>
-                                <th class="content">Turnaround&nbsp;Time</th>
-                                <th class="content">Waiting&nbsp;Time</th>
-                            </thead>
-
-                            <tbody class="processes">
-
-                            </tbody>
-
-                        </table>
-
-                </div>
-
-                <div class="avg">
-
-                    <p class="ansline">Average Turnaround Time: <span id="avgtt"></span></p>
-                    <p class="ansline">Average Waiting Time: <span id="avgwt"></span></p>
-
-                </div>
+                </form>
+            </div>
 
 
-                <div class="chart-container">
+            <div class="answer-container">
 
-                    <p class="ansline">Gantt Chart : </p>
+                <h1 class="title">Answer</h1>
 
-                    <div class="chart">
-                        
-                        <!-- DEMO -->
+                <div class="error"></div>
 
-                        <!-- <div class="chartline">
-                            <div class="boxes">
-                                <div class="box"><span>A</span></div>
-                                <div class="box"><span>A</span></div>
-                                <div class="box"><span>A</span></div>
-                                <div class="box"><span>A</span></div>
-                            </div>
-                            <div class="timestamps">
-                                <div class="timestamp">0</div>
-                                <div class="timestamp">1</div>
-                                <div class="timestamp">4</div>
-                                <div class="timestamp">5</div>
-                                <div class="timestamp">8</div>
-                            </div>
-                        </div> -->
 
+                <div class="answer">
+
+                    <div class="table-container">
+
+                            <table class="table">
+
+                                <thead class="header row">
+                                    <th class="content">Process&nbsp;IDs</th>
+                                    <th class="content">Arrival&nbsp;Time</th>
+                                    <th class="content">Burst&nbsp;Time</th>
+                                    <th class="content">Priorities</th>
+                                    <th class="content">Turnaround&nbsp;Time</th>
+                                    <th class="content">Waiting&nbsp;Time</th>
+                                </thead>
+
+                                <tbody class="processes">
+
+                                </tbody>
+
+                            </table>
 
                     </div>
 
-                </div>
-                
-            </div>
+                    <div class="avg">
 
+                        <p class="ansline">Average Turnaround Time: <span id="avgtt"></span></p>
+                        <p class="ansline">Average Waiting Time: <span id="avgwt"></span></p>
+
+                    </div>
+
+
+                    <div class="chart-container">
+
+                        <p class="ansline">Gantt Chart : </p>
+
+                        <div class="chart">
+                            
+                            <!-- DEMO -->
+
+                            <!-- <div class="chartline">
+                                <div class="boxes">
+                                    <div class="box"><span>A</span></div>
+                                    <div class="box"><span>A</span></div>
+                                    <div class="box"><span>A</span></div>
+                                    <div class="box"><span>A</span></div>
+                                </div>
+                                <div class="timestamps">
+                                    <div class="timestamp">0</div>
+                                    <div class="timestamp">1</div>
+                                    <div class="timestamp">4</div>
+                                    <div class="timestamp">5</div>
+                                    <div class="timestamp">8</div>
+                                </div>
+                            </div> -->
+
+
+                        </div>
+
+                    </div>
+                    
+                </div>
+
+            </div>
         </div>
+
     </div>
 
     <!-- axios -->

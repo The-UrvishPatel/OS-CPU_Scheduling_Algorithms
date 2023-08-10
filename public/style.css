@@ -13,10 +13,20 @@ font-family: 'Ysabeau SC', sans-serif; */
 
 body
 {
+    display: flex;
+    flex-direction: column;
     height: auto;
-    /* width: 100%; */
     font-family: 'Poppins', sans-serif;
     background-color: rgb(250, 250, 250);
+    align-items: center;
+    justify-content: center;
+}
+
+.all-container
+{
+    height: auto; 
+    width: min(100%, 2000px);
+    /* border: 2px solid red; */
 }
 
 .icon
@@ -47,6 +57,7 @@ body
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 20px;
 }
 
 a
@@ -64,6 +75,7 @@ a
     overflow: auto;
     /* border: 2px solid red; */
 }
+
 
 .form-container
 {
@@ -150,7 +162,7 @@ a
     flex-direction: column;
     /* border: 2px solid blue; */
     overflow: auto;
-    padding: 10px 30px;
+    padding: 20px 30px;
     gap: 20px;
     width: auto;
 }
@@ -177,6 +189,8 @@ table,th,td
     display: flex;
     flex-direction: column;
     gap: 20px;
+    align-items: flex-start;
+    justify-content: center;
 }
 
 .chart
@@ -208,7 +222,7 @@ table,th,td
 .box
 {
     display: flex;
-    background-color: rgb(230, 230, 230);
+    background-color: rgb(245, 245, 245);
     border: 2px solid rgb(0, 0, 0);
     color: black;
     width: 50px;
@@ -251,4 +265,57 @@ table,th,td
     font-size: 20px;
     font-weight: 600;
     padding: 10px 30px;
+}
+
+
+
+
+@media only screen and (max-width: 1000px) 
+{
+    .container
+    {
+        height: auto;
+        width: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        /* border: 2px solid red; */
+    }
+
+    .form-container
+    {
+        width: 90%;
+        padding: 5%;
+        color: rgb(250,250,250);
+        border: 2px solid red;
+    }
+
+    .answer-container
+    {
+        /* border: 2px solid green; */
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+        padding: 5%;
+        border: 2px solid red;
+        margin-bottom: 20px;
+    }
+
+    .answer
+    {
+        display: flex;
+        flex-direction: column;
+        /* border: 2px solid blue; */
+        gap: 20px;
+        width: auto;
+    }
+
+    .table-container
+    {
+        padding: 0;
+        overflow: unset;
+    }
+
 }

@@ -12,12 +12,6 @@ app.use(express.static('./public'))
 app.use(express.json())
 
 
-app.get('/urvish',(req,res)=>{
-
-    console.log(res)
-    res.urvish = "urvish"
-    res.send('this is urvish')
-})
 
 //routes
 
