@@ -289,7 +289,7 @@ table,th,td
         width: 90%;
         padding: 5%;
         color: rgb(250,250,250);
-        border: 2px solid red;
+        /* border: 2px solid red; */
     }
 
     .answer-container
@@ -299,7 +299,7 @@ table,th,td
         flex-direction: column;
         width: 90%;
         padding: 5%;
-        border: 2px solid red;
+        /* border: 2px solid red; */
         margin-bottom: 20px;
     }
 
