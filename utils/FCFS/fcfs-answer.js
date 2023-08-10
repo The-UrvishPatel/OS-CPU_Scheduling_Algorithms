@@ -1,17 +1,18 @@
 const transformData = require('../transform-data')
 const sortFcfs = require('./sort-fcfs')
+const transformGanttChart = require('../transform-ganttChart')
+
 
 const fcfsAnswer = (req) => {
 
-    let data = transformData(req)
+    let {data} = transformData(req)
     data = sortFcfs(data)
-    // console.log(data)
 
     let totalProcess = data.length
 
     let result = {
         "ganttChart": [],
-        "processes" : []
+        "processes" : {}
     }
 
     let time = 0
@@ -25,7 +26,7 @@ const fcfsAnswer = (req) => {
         let burst = data[curr_process].burst
         let pid = data[curr_process].pid
         let arrival = data[curr_process].arrival
-        // console.log(pid,burst,arrival)
+        let priority = data[curr_process].priority
 
         if(arrival>time)
         {
@@ -44,19 +45,15 @@ const fcfsAnswer = (req) => {
         let ta = time - arrival
         let wait = ta - burst
         
-        // waiting.push(wait)
-        // turnaround.push(ta)
-        
-        let process = {
+        result.processes[pid] = {
             
             "pid": pid,
+            "arrival": arrival,
+            "burst": burst,
+            "priority": priority,
             "turnaround": ta,
             "waiting": wait
         }
-
-        
-        result.processes.push(process)
-
         
         avgturnaround += ta
         avgwaiting += wait
@@ -65,7 +62,6 @@ const fcfsAnswer = (req) => {
         
     }
 
-    // console.log("hey----")
 
     avgturnaround /= totalProcess
     avgwaiting /= totalProcess
@@ -73,7 +69,9 @@ const fcfsAnswer = (req) => {
     result.avgturnaround = avgturnaround
     result.avgwaiting = avgwaiting
 
-    // console.log(ganttChart,waiting,turnaround,avgturnaround,avgwaiting)
+    let showgc = transformGanttChart(result.ganttChart)
+
+    result.showgc = showgc
 
     return result
 }

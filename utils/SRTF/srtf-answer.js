@@ -1,18 +1,17 @@
 const transformData = require('../transform-data')
 const sortSrtf = require('./sort-srtf')
+const transformGanttChart = require('../transform-ganttChart')
 
 
 const srtfAnswer = (req) => {
 
-    let data = transformData(req)
-    // data = sortPriority(data)
-    // console.log(data)
+    let {data} = transformData(req)
 
     let totalProcess = data.length
 
     let result = {
         "ganttChart": [],
-        "processes" : []
+        "processes" : {}
     }
 
     let time = 0
@@ -34,12 +33,8 @@ const srtfAnswer = (req) => {
             /*data[execute].pid === last_exeID ||  data[execute].priority >= oncpu->priority ||
             execute->last_executed > oncpu->last_executed */ )) 
         {
-            // console.log("hey")
             execute++
         }
-
-        // console.log(execute)
-
 
         if(execute == totalProcess)
         {
@@ -51,6 +46,7 @@ const srtfAnswer = (req) => {
             let burst = data[execute].burst
             let pid = data[execute].pid
             let arrival = data[execute].arrival
+            let priority = data[execute].priority
 
             result.ganttChart.push(pid)
 
@@ -58,21 +54,21 @@ const srtfAnswer = (req) => {
 
             time += 1
 
-            // data[execute].lastexe = time
 
             if(data[execute].remtime === 0)
             {
                 let ta = time - arrival
                 let wait = ta - burst
 
-                let process = {
-                
+                result.processes[pid] = {
+            
                     "pid": pid,
+                    "arrival": arrival,
+                    "burst": burst,
+                    "priority": priority,
                     "turnaround": ta,
                     "waiting": wait
                 }
-
-                result.processes.push(process)
 
                 avgturnaround += ta
                 avgwaiting += wait
@@ -84,7 +80,6 @@ const srtfAnswer = (req) => {
         }
     }
 
-    // console.log("hey----")
 
     avgturnaround /= totalProcess
     avgwaiting /= totalProcess
@@ -92,7 +87,9 @@ const srtfAnswer = (req) => {
     result.avgturnaround = avgturnaround
     result.avgwaiting = avgwaiting
 
-    // console.log(ganttChart,waiting,turnaround,avgturnaround,avgwaiting)
+    let showgc = transformGanttChart(result.ganttChart)
+
+    result.showgc = showgc
 
     return result
 }

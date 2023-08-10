@@ -1,18 +1,17 @@
 const transformData = require('../transform-data')
 const sortRr = require('./sort-rr')
+const transformGanttChart = require('../transform-ganttChart')
 
 
 const rrAnswer = (req) => {
 
-    let data = transformData(req)
-    // data = sortPriority(data)
-    // console.log(data)
+    let { data, quanta } = transformData(req)
 
     let totalProcess = data.length
 
     let result = {
         "ganttChart": [],
-        "processes" : []
+        "processes" : {}
     }
 
     let time = 0
@@ -21,11 +20,12 @@ const rrAnswer = (req) => {
 
     let completed = 0
     // let last_exeID = '#'
-    
+
+    data = sortRr(data,0)
 
     while(completed<totalProcess)
     {
-        data = sortRr(data)
+        let q = quanta
 
         let execute = 0
 
@@ -33,12 +33,8 @@ const rrAnswer = (req) => {
             /*data[execute].pid === last_exeID ||  data[execute].priority >= oncpu->priority ||
             execute->last_executed > oncpu->last_executed */ )) 
         {
-            // console.log("hey")
             execute++
         }
-
-        // console.log(execute)
-
 
         if(execute == totalProcess)
         {
@@ -47,47 +43,57 @@ const rrAnswer = (req) => {
         }
         else
         {
-            let burst = data[execute].burst
+            let rem = data[execute].remtime
             let pid = data[execute].pid
             let arrival = data[execute].arrival
+            let priority = data[execute].priority
 
-            let cnt = 0, quanta = 0
+            let cnt = 0
 
-            while(burst!=0 && quanta!=0)
+            while(rem!=0 && q!=0)
             {
                 result.ganttChart.push(pid)
                 cnt++
+                rem--
+                q--
             }
 
             time += cnt
 
-            // data[execute].lastexe = time
+
+            data[execute].remtime -= cnt
 
             if(data[execute].remtime === 0)
             {
                 let ta = time - arrival
-                let wait = ta - burst
+                let wait = ta - data[execute].burst
 
-                let process = {
-                
+                result.processes[pid] = {
+            
                     "pid": pid,
+                    "arrival": arrival,
+                    "burst": data[execute].burst,
+                    "priority": priority,
                     "turnaround": ta,
                     "waiting": wait
                 }
 
-                result.processes.push(process)
-
                 avgturnaround += ta
                 avgwaiting += wait
 
-                console.log(process)
-
                 completed++
             }
+            else
+            {
+                data[execute].arr = time
+                data[execute].lastexe = time
+            }
+
         }
+
+        data = sortRr(data,1)
     }
 
-    // console.log("hey----")
 
     avgturnaround /= totalProcess
     avgwaiting /= totalProcess
@@ -95,7 +101,10 @@ const rrAnswer = (req) => {
     result.avgturnaround = avgturnaround
     result.avgwaiting = avgwaiting
 
-    // console.log(ganttChart,waiting,turnaround,avgturnaround,avgwaiting)
+    
+    let showgc = transformGanttChart(result.ganttChart)
+
+    result.showgc = showgc
 
     return result
 }

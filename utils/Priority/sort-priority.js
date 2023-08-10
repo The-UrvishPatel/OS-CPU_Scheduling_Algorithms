@@ -28,19 +28,19 @@ const sortPriority = (data) => {
                 data[j] = data[j+1]
                 data[j+1] = temp
             }
-            else if(cur_priority === next_priority && cur_lastexe > next_lastexe)
+            // else if(cur_priority === next_priority && cur_lastexe > next_lastexe)
+            // {
+            //     let temp = data[j]
+            //     data[j] = data[j+1]
+            //     data[j+1] = temp
+            // }
+            else if(cur_priority === next_priority /*&& cur_lastexe === next_lastexe */ && cur_arrival > next_arrival)
             {
                 let temp = data[j]
                 data[j] = data[j+1]
                 data[j+1] = temp
             }
-            else if(cur_priority === next_priority && cur_lastexe === next_lastexe && cur_arrival > next_arrival)
-            {
-                let temp = data[j]
-                data[j] = data[j+1]
-                data[j+1] = temp
-            }
-            else if(cur_priority === next_priority && cur_lastexe === next_lastexe && cur_arrival === next_arrival && cur_burst > next_burst)
+            else if(cur_priority === next_priority /*&& cur_lastexe === next_lastexe */ && cur_arrival === next_arrival && cur_burst > next_burst)
             {
                 let temp = data[j]
                 data[j] = data[j+1]

@@ -1,5 +1,15 @@
 const formDOM = document.querySelector(".scheduling-form");
+const tableDOM = document.querySelector(".table");
+const chartDOM = document.querySelector(".chart");
+const errorDOM = document.querySelector(".error");
+const tableRow = document.querySelector(".processes");
 const answerDOM = document.querySelector(".answer");
+const avgttDOM = document.querySelector("#avgtt");
+const avgwtDOM = document.querySelector("#avgwt");
+
+answerDOM.style.display = "none"
+errorDOM.style.display = "none"
+
 
 formDOM.addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -9,31 +19,103 @@ formDOM.addEventListener("submit", async (event) => {
   const arrival = formDOM.arrival.value;
   const burst = formDOM.burst.value;
   const priority = formDOM.priority.value;
+  const quanta = formDOM.quanta.value;
+  
+  answerDOM.style.display = "none"
+  errorDOM.style.display = "none"
+
+  tableRow.innerHTML = ""
+  chartDOM.innerHTML = ""
 
   try {
-    const response = await axios.post(`/api/scheduling/${scheduling}`, {
+
+    let response = await axios.post(`/api/scheduling/${scheduling}`, {
+      scheduling,
       pid,
       arrival,
       burst,
       priority,
+      quanta
     });
 
-    // console.log({
-    //   pid,
-    //   arrival,
-    //   burst,
-    //   priority,
-    // })
 
-    console.log(response)
-    
-    answerDOM.textContent = response.data.ganttChart + "\n" + 
-    response.data.waiting + "\n" + 
-    response.data.turnaround + "\n" + 
-    response.data.avgturnaround + "\n" + 
-    response.data.avgwaiting;
+    response = response.data.result
+
+    let pids = pid.split(',')
+
+    for(let i=0;i<pids.length;i++)
+    {
+      let row = document.createElement('tr');
+      row.className = pids[i]
+      tableRow.appendChild(row)
+
+      let currow = document.querySelector(`.${pids[i]}`)
+
+      for(let x in response.processes[pids[i]])
+      {
+        let data = document.createElement('td');
+        data.innerHTML = response.processes[pids[i]][x]
+        currow.appendChild(data)
+      }
+    }
+
+    avgttDOM.innerHTML = response.avgturnaround
+    avgwtDOM.innerHTML = response.avgwaiting
+
+
+    let gc = response.showgc
+
+    let cl = Object.keys(gc).length
+
+
+    for(let i=1;i<=cl;i++)
+    {
+      let chartline = document.createElement('div')
+      chartline.className = "chartline"
+      chartline.id = "chartline" + i
+      chartDOM.appendChild(chartline)
+      
+      chartline = document.querySelector(`#chartline${i}`)
+      
+      let boxes = document.createElement('div')
+      boxes.className = "boxes"
+      boxes.id = "boxes" + i
+      chartline.appendChild(boxes)
+
+      boxes = document.querySelector(`#boxes${i}`)
+
+      let s = gc[i]['s']
+
+      let allboxes = s.map((ele)=>{
+        return (`<div class="box"><span>${ele}</span></div>`)
+      }).join('')
+
+      boxes.innerHTML = allboxes
+      
+      let timestamps = document.createElement('div')
+      timestamps.className = "timestamps"
+      timestamps.id = "timestamps" + i
+      chartline.appendChild(timestamps)
+
+      timestamps = document.querySelector(`#timestamps${i}`)
+
+      let t = gc[i]['t']
+
+      let allstamps = t.map((ele)=>{
+        return (`<div class="timestamp">${ele}</div>`)
+      }).join('')
+
+      timestamps.innerHTML = allstamps
+
+    }
+
+
+    answerDOM.style.display = "flex"
 
   } catch (error) {
-    answerDOM.textContent = error;
+
+    errorDOM.innerHTML = "Please check the input, and Try again!";
+    errorDOM.style.display = "initial"
+    
   }
 });

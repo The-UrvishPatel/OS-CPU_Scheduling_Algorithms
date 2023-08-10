@@ -1,9 +1,11 @@
 const transformData = require('../transform-data')
 const sortSjf = require('./sort-sjf')
+const transformGanttChart = require('../transform-ganttChart')
+
 
 const sjfAnswer = (req) => {
 
-    let data = transformData(req)
+    let {data} = transformData(req)
     data = sortSjf(data)
     console.log(data)
 
@@ -11,7 +13,7 @@ const sjfAnswer = (req) => {
 
     let result = {
         "ganttChart": [],
-        "processes" : []
+        "processes" : {}
     }
 
     let time = 0
@@ -26,12 +28,8 @@ const sjfAnswer = (req) => {
 
         while(execute!==totalProcess && (data[execute].arrival > time || data[execute].remtime === 0)) 
         {
-            // console.log("hey")
             execute++
         }
-
-        // console.log(execute)
-
 
         if(execute == totalProcess)
         {
@@ -43,6 +41,7 @@ const sjfAnswer = (req) => {
             let burst = data[execute].burst
             let pid = data[execute].pid
             let arrival = data[execute].arrival
+            let priority = data[execute].priority
 
             for(let j=0;j<burst;j++)
             result.ganttChart.push(pid)
@@ -54,15 +53,15 @@ const sjfAnswer = (req) => {
             let ta = time - arrival
             let wait = ta - burst
 
-            let process = {
+            result.processes[pid] = {
             
                 "pid": pid,
+                "arrival": arrival,
+                "burst": burst,
+                "priority": priority,
                 "turnaround": ta,
                 "waiting": wait
             }
-    
-            
-            result.processes.push(process)
 
             avgturnaround += ta
             avgwaiting += wait
@@ -73,7 +72,6 @@ const sjfAnswer = (req) => {
         }
     }
 
-    // console.log("hey----")
 
     avgturnaround /= totalProcess
     avgwaiting /= totalProcess
@@ -81,7 +79,10 @@ const sjfAnswer = (req) => {
     result.avgturnaround = avgturnaround
     result.avgwaiting = avgwaiting
 
-    // console.log(ganttChart,waiting,turnaround,avgturnaround,avgwaiting)
+
+    let showgc = transformGanttChart(result.ganttChart)
+
+    result.showgc = showgc
 
     return result
 }

@@ -20,12 +20,15 @@ app.get('/urvish',(req,res)=>{
 })
 
 //routes
+
 app.use('/api/scheduling',routes)
 
 
 //errors
+
 app.use(notFoundError)
 app.use(errorHandler)
+
 
 
 const port = process.env.PORT || 3000

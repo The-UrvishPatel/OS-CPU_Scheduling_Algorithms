@@ -1,17 +1,17 @@
 const transformData = require('../transform-data')
 const sortPriority = require('./sort-priority')
+const transformGanttChart = require('../transform-ganttChart')
+
 
 const priorityAnswer = (req) => {
 
-    let data = transformData(req)
-    // data = sortPriority(data)
-    // console.log(data)
+    let {data} = transformData(req)
 
     let totalProcess = data.length
 
     let result = {
         "ganttChart": [],
-        "processes" : []
+        "processes" : {}
     }
 
     let time = 0
@@ -32,12 +32,8 @@ const priorityAnswer = (req) => {
             /*data[execute].pid === last_exeID ||  data[execute].priority >= oncpu->priority ||
             execute->last_executed > oncpu->last_executed */ )) 
         {
-            // console.log("hey")
             execute++
         }
-
-        // console.log(execute)
-
 
         if(execute == totalProcess)
         {
@@ -49,6 +45,7 @@ const priorityAnswer = (req) => {
             let burst = data[execute].burst
             let pid = data[execute].pid
             let arrival = data[execute].arrival
+            let priority = data[execute].priority
 
             result.ganttChart.push(pid)
 
@@ -63,14 +60,15 @@ const priorityAnswer = (req) => {
                 let ta = time - arrival
                 let wait = ta - burst
 
-                let process = {
-                
+                result.processes[pid] = {
+            
                     "pid": pid,
+                    "arrival": arrival,
+                    "burst": burst,
+                    "priority": priority,
                     "turnaround": ta,
                     "waiting": wait
                 }
-
-                result.processes.push(process)
 
                 avgturnaround += ta
                 avgwaiting += wait
@@ -83,7 +81,6 @@ const priorityAnswer = (req) => {
         }
     }
 
-    // console.log("hey----")
 
     avgturnaround /= totalProcess
     avgwaiting /= totalProcess
@@ -91,7 +88,10 @@ const priorityAnswer = (req) => {
     result.avgturnaround = avgturnaround
     result.avgwaiting = avgwaiting
 
-    // console.log(ganttChart,waiting,turnaround,avgturnaround,avgwaiting)
+
+    let showgc = transformGanttChart(result.ganttChart)
+
+    result.showgc = showgc
 
     return result
 }
