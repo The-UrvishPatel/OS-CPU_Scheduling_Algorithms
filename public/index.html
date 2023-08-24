@@ -18,10 +18,7 @@
     <div class="all-container">
         <div class="title">
             <h1>SchedX</h1>
-            <div class="github">
-                <ion-icon name="logo-github" class="icon"></ion-icon>
-                <a href="https://github.com/The-UrvishPatel/OS-CPU_Scheduling_Algorithms">Github</a>
-            </div>
+            <p class="tagline">&nbsp;-&nbsp;&nbsp;&nbsp;CPU Scheduling Algorithms</p>
         </div>
 
         <div class="container">
@@ -54,12 +51,12 @@
                         <input type="text" name="burst" id="burst" class="input" placeholder="e.g. 4,3,6,5,7">
                     </div>
                     
-                    <div class="line">
+                    <div class="line" id="priorityLine">
                         <label for="priority">Enter Priorities</label>
                         <input type="text" name="priority" id="priority" class="input" placeholder="e.g. 1,2,3,4,5"> 
                     </div>
                     
-                    <div class="line">
+                    <div class="line" id="quantaLine">
                         <label for="quanta">Enter Time Quanta for Round Robin</label>
                         <input type="text" name="quanta" id="quanta" class="input" placeholder="e.g. 2">
                     </div>
@@ -86,10 +83,11 @@
                                 <thead class="header row">
                                     <th class="content">Process&nbsp;IDs</th>
                                     <th class="content">Arrival&nbsp;Time</th>
-                                    <th class="content">Burst&nbsp;Time</th>
                                     <th class="content">Priorities</th>
+                                    <th class="content">Burst&nbsp;Time</th>
                                     <th class="content">Turnaround&nbsp;Time</th>
                                     <th class="content">Waiting&nbsp;Time</th>
+                                    <th class="content">Completion&nbsp;Time</th>
                                 </thead>
 
                                 <tbody class="processes">
@@ -97,13 +95,6 @@
                                 </tbody>
 
                             </table>
-
-                    </div>
-
-                    <div class="avg">
-
-                        <p class="ansline">Average Turnaround Time: <span id="avgtt"></span></p>
-                        <p class="ansline">Average Waiting Time: <span id="avgwt"></span></p>
 
                     </div>
 
@@ -141,8 +132,26 @@
 
             </div>
         </div>
-
+        
+        
     </div>
+    
+    <footer class="footer">
+
+        <div class="links">
+            <ion-icon name="logo-github" class="icon"></ion-icon>
+            <a href="https://github.com/The-UrvishPatel/OS-CPU_Scheduling_Algorithms">Github</a>
+        </div>
+
+        <p>© 2023 - Urvish Patel</p>
+        
+        <div class="links">
+            <ion-icon name="logo-twitter" style="color: rgb(0, 191, 255);"></ion-icon>
+            <a href="https://twitter.com/Urvuuu">Twitter</a>
+        </div>
+        
+    </footer>
+    
 
     <!-- axios -->
 

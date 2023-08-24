@@ -10,6 +10,7 @@ const validateInput = (req,res,next) => {
     let priority = req.body.priority
     let quanta = req.body.quanta
 
+    //see quanta is there or not
 
     if(scheduling==="rr")
     {
@@ -23,6 +24,7 @@ const validateInput = (req,res,next) => {
     }
 
     
+    //verify array size and numbers are valid
 
     if(pid==="")
     throw new InvalidInput(StatusCodes.BAD_REQUEST, "Invalid Input! Process IDs can't be empty!")
@@ -89,6 +91,8 @@ const validateInput = (req,res,next) => {
     req.body.burst = burst
     req.body.priority = priority
     req.body.quanta = quanta
+
+    console.log("Valid", req.body)
 
     next()
 }

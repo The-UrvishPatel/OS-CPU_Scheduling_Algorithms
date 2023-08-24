@@ -58,7 +58,7 @@ function transformGanttChart(ganttChart) {
         answer[l].t = t
     }
 
-
+    
     return answer
 }
 

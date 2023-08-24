@@ -13,11 +13,11 @@ const sortPriority = (data,flag) => {
             let cur_burst = data[j].burst
             let next_burst = data[j+1].burst
 
-            let cur_priority = data[j].priority
-            let next_priority = data[j+1].priority
+            // let cur_priority = data[j].priority
+            // let next_priority = data[j+1].priority
 
-            let cur_lastexe = data[j].lastexe
-            let next_lastexe = data[j+1].lastexe
+            // let cur_lastexe = data[j].lastexe
+            // let next_lastexe = data[j+1].lastexe
 
             
             let cur_arr = data[j].arr
@@ -51,8 +51,6 @@ const sortPriority = (data,flag) => {
             }
         }
     }
-
-    // console.log(data)
 
     return data
 }

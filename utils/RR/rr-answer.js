@@ -15,8 +15,11 @@ const rrAnswer = (req) => {
     }
 
     let time = 0
+    
     let avgturnaround = 0
     let avgwaiting = 0
+    let avgcompletion = 0
+    let avgburst = 0
 
     let completed = 0
     // let last_exeID = '#'
@@ -72,14 +75,17 @@ const rrAnswer = (req) => {
             
                     "pid": pid,
                     "arrival": arrival,
-                    "burst": data[execute].burst,
                     "priority": priority,
+                    "burst": data[execute].burst,
                     "turnaround": ta,
-                    "waiting": wait
+                    "waiting": wait,
+                    "completion": time
                 }
 
                 avgturnaround += ta
                 avgwaiting += wait
+                avgcompletion += time
+                avgburst += data[execute].burst
 
                 completed++
             }
@@ -97,9 +103,13 @@ const rrAnswer = (req) => {
 
     avgturnaround /= totalProcess
     avgwaiting /= totalProcess
+    avgcompletion /= totalProcess
+    avgburst /= totalProcess
 
     result.avgturnaround = avgturnaround
     result.avgwaiting = avgwaiting
+    result.avgcompletion = avgcompletion
+    result.avgburst = avgburst
 
     
     let showgc = transformGanttChart(result.ganttChart)

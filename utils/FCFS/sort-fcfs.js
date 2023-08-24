@@ -13,8 +13,8 @@ const sortFcfs = (data) => {
             let cur_burst = data[j].burst
             let next_burst = data[j+1].burst
 
-            let cur_priority = data[j].priority
-            let next_priority = data[j+1].priority
+            // let cur_priority = data[j].priority
+            // let next_priority = data[j+1].priority
 
             if(cur_arrival > next_arrival)
             {
@@ -22,13 +22,13 @@ const sortFcfs = (data) => {
                 data[j] = data[j+1]
                 data[j+1] = temp
             }
-            else if(cur_arrival === next_arrival && cur_priority > next_priority)
-            {
-                let temp = data[j]
-                data[j] = data[j+1]
-                data[j+1] = temp
-            }
-            else if(cur_arrival === next_arrival && cur_priority === next_priority && cur_burst > next_burst)
+            // else if(cur_arrival === next_arrival && cur_priority > next_priority)
+            // {
+            //     let temp = data[j]
+            //     data[j] = data[j+1]
+            //     data[j+1] = temp
+            // }
+            else if(cur_arrival === next_arrival && /* cur_priority === next_priority && */ cur_burst > next_burst)
             {
                 let temp = data[j]
                 data[j] = data[j+1]

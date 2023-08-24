@@ -16,11 +16,11 @@ const sortPriority = (data) => {
             let cur_priority = data[j].priority
             let next_priority = data[j+1].priority
 
-            let cur_lastexe = data[j].lastexe
-            let next_lastexe = data[j+1].lastexe
+            // let cur_lastexe = data[j].lastexe
+            // let next_lastexe = data[j+1].lastexe
 
-            let cur_remtime = data[j].remtime
-            let next_remtime = data[j+1].remtime
+            // let cur_remtime = data[j].remtime
+            // let next_remtime = data[j+1].remtime
 
             if(cur_priority > next_priority)
             {
