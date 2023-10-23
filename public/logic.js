@@ -84,8 +84,6 @@ formDOM.addEventListener("submit", async (event) => {
   chartDOM.innerHTML = ""
 
   try {
-    
-    console.log(`/api/scheduling/${scheduling}`)
 
     let response = await axios.post(`/api/scheduling/${scheduling}`, {
       scheduling,

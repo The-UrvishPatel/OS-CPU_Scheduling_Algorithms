@@ -62,11 +62,18 @@ const validateInput = (req,res,next) => {
         return brst
     })
 
+
     if(burst.length != totalLength)
     throw new InvalidInput(StatusCodes.BAD_REQUEST, "Invalid Input! Provide all values for burst time!")
 
 
+    for(let i=0;i<totalLength;i++)
+    {
+        if(burst[i]===0)
+        throw new InvalidInput(StatusCodes.BAD_REQUEST, "Invalid Input! Burst time can't be zero!")
+    }
 
+    
     if(priority!=="")
     priority = priority.split(',').map((num)=>{
 
