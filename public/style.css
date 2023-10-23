@@ -127,6 +127,16 @@ body
     background-color: hsl(230, 100%, 50%);
 }
 
+.download-disable
+{
+    background-color: gray;
+}
+
+.download-disable:hover
+{
+    background-color: hsl(0, 0%, 45%);
+}
+
 
 
 
@@ -164,7 +174,7 @@ table,th,td
     text-align: center;
     vertical-align: middle;
     border: 2px solid rgb(200, 200, 200);
-    border-radius: 20px;
+    /* border-radius: 20px; */
     border-collapse: collapse;
 }
 

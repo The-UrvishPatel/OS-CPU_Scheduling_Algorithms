@@ -23,7 +23,7 @@
 
         <div class="container">
             <div class="form-container">
-                <form class="scheduling-form">
+                <form class="scheduling-form" method="post">
                     <div class="line">
                         <label for="scheduling">Choose Scheduling Algorithm</label>
                         <select name="scheduling" id="scheduling" class="input">
@@ -62,8 +62,11 @@
                     </div>
 
                     <button type="submit" class="btn">Get Answer!</button>
-
+                    <button type="button" id="download" class="btn">Download and Share Answer</button>
+                    
                 </form>
+
+            
             </div>
 
 
@@ -140,14 +143,14 @@
 
         <div class="links">
             <ion-icon name="logo-github" class="icon"></ion-icon>
-            <a href="https://github.com/The-UrvishPatel/OS-CPU_Scheduling_Algorithms">Github</a>
+            <a href="https://github.com/The-UrvishPatel/OS-CPU_Scheduling_Algorithms">Github - @The-UrvishPatel</a>
         </div>
 
         <p>© 2023 - Urvish Patel</p>
         
         <div class="links">
             <ion-icon name="logo-twitter" style="color: rgb(0, 191, 255);"></ion-icon>
-            <a href="https://twitter.com/Urvuuu">Twitter</a>
+            <a href="https://twitter.com/Urvuuu">Twitter - @Urvuuu</a>
         </div>
         
     </footer>
@@ -167,6 +170,8 @@
     </script>
 
     <script src="logic.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   
 </body>
 </html>

@@ -6,9 +6,15 @@ const tableRow = document.querySelector(".processes")
 const answerDOM = document.querySelector(".answer")
 const avgttDOM = document.querySelector("#avgtt")
 const avgwtDOM = document.querySelector("#avgwt")
+const downloadBtn = document.querySelector("#download")
+
 
 answerDOM.style.display = "none"
 errorDOM.style.display = "none"
+
+
+let downloadED = "disable" 
+downloadBtn.classList.add("download-disable");
 
 
 
@@ -21,6 +27,8 @@ const priorityLine = document.querySelector("#priorityLine")
 priorityLine.style.display = "none"
 
 const selectSched = document.querySelector("#scheduling")
+
+
 
 
 selectSched.addEventListener("change", ()=>{
@@ -47,8 +55,19 @@ selectSched.addEventListener("change", ()=>{
 
 
 
+formDOM.addEventListener("change", () => {
+
+  downloadED = "disable" 
+  downloadBtn.classList.add("download-disable");
+
+})
+
+
+
+
 
 formDOM.addEventListener("submit", async (event) => {
+
   event.preventDefault()
 
   const scheduling = formDOM.scheduling.value
@@ -65,6 +84,8 @@ formDOM.addEventListener("submit", async (event) => {
   chartDOM.innerHTML = ""
 
   try {
+    
+    console.log(`/api/scheduling/${scheduling}`)
 
     let response = await axios.post(`/api/scheduling/${scheduling}`, {
       scheduling,
@@ -177,6 +198,11 @@ formDOM.addEventListener("submit", async (event) => {
 
 
     answerDOM.style.display = "flex"
+    
+
+    downloadED = "enable" 
+    downloadBtn.classList.remove("download-disable");
+
 
   } catch (error) {
 
@@ -184,4 +210,31 @@ formDOM.addEventListener("submit", async (event) => {
     errorDOM.style.display = "initial"
     
   }
+})
+
+
+downloadBtn.addEventListener("click", () => {
+
+  if(downloadED==="disable")
+  return ;
+
+  const toDownload = document.querySelector('body');
+
+  html2canvas(toDownload,{
+    
+    allowTaint: true,
+    useCORS: true,
+    scale: 5,
+    windowWidth: 2000,   // Set the desired width of the window
+    windowHeight: 500,
+
+  }).then(function (canvas) {
+
+    const link = document.createElement('a');
+    link.download = 'answer_SchedX.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    
+  });
+
 })
