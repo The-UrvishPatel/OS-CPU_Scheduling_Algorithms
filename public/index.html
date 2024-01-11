@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+    
+    <link rel="shortcut icon" href="./logo/favicon.ico" type="image/x-icon"/>
+
+    <link rel="stylesheet" href="./style.css">
+
+    <title>CPU Scheduling Algos</title>
+
+  </head>
+  <body>
+
+    <div class="all-container">
+        <div class="title">
+            <h1>SchedX</h1>
+            <p class="tagline">&nbsp;-&nbsp;&nbsp;&nbsp;CPU Scheduling Algorithms</p>
+        </div>
+
+        <div class="container">
+            <div class="form-container">
+                <form class="scheduling-form" method="post">
+                    <div class="line">
+                        <label for="scheduling">Choose Scheduling Algorithm</label>
+                        <select name="scheduling" id="scheduling" class="input">
+                            <option value="fcfs" selected>FCFS</option>
+                            <option value="sjf">Shortest Job First</option>
+                            <option value="rr">Round Robin</option>
+                            <option value="ps">Priority Scheduling</option>
+                            <option value="srtf">Shortest Remaining Time First</option>
+                            <option value="lrtf">Largest Remaining Time First</option>
+                        </select>
+                    </div>
+
+                    <div class="line">
+                        <label for="pid">Enter Process IDs</label>
+                        <input type="text" name="pid" id="pid" class="input" placeholder="e.g. A,B,C,D,E">
+                    </div>
+                    
+                    <div class="line">
+                        <label for="arrival">Enter Arrival Times</label>
+                        <input type="text" name="arrival" id="arrival" class="input" placeholder="e.g. 0,2,3,4,3">
+                    </div>
+                    
+                    <div class="line">
+                        <label for="burst">Enter Burst Times</label>
+                        <input type="text" name="burst" id="burst" class="input" placeholder="e.g. 4,3,6,5,7">
+                    </div>
+                    
+                    <div class="line" id="priorityLine">
+                        <label for="priority">Enter Priorities</label>
+                        <input type="text" name="priority" id="priority" class="input" placeholder="e.g. 1,2,3,4,5"> 
+                    </div>
+                    
+                    <div class="line" id="quantaLine">
+                        <label for="quanta">Enter Time Quanta for Round Robin</label>
+                        <input type="text" name="quanta" id="quanta" class="input" placeholder="e.g. 2">
+                    </div>
+
+                    <button type="submit" class="btn">Get Answer!</button>
+                    <button type="button" id="download" class="btn">Download and Share Answer</button>
+                    
+                </form>
+
+            
+            </div>
+
+
+            <div class="answer-container">
+
+                <h1 class="title">Answer</h1>
+
+                <div class="error"></div>
+
+
+                <div class="answer">
+
+                    <div class="table-container">
+
+                            <table class="table">
+
+                                <thead class="header row">
+                                    <th class="content">Process&nbsp;IDs</th>
+                                    <th class="content">Arrival&nbsp;Time</th>
+                                    <th class="content">Priorities</th>
+                                    <th class="content">Burst&nbsp;Time</th>
+                                    <th class="content">Turnaround&nbsp;Time</th>
+                                    <th class="content">Waiting&nbsp;Time</th>
+                                    <th class="content">Completion&nbsp;Time</th>
+                                </thead>
+
+                                <tbody class="processes">
+
+                                </tbody>
+
+                            </table>
+
+                    </div>
+
+
+                    <div class="chart-container">
+
+                        <p class="ansline">Gantt Chart : </p>
+
+                        <div class="chart">
+                            
+                            <!-- DEMO -->
+
+                            <!-- <div class="chartline">
+                                <div class="boxes">
+                                    <div class="box"><span>A</span></div>
+                                    <div class="box"><span>A</span></div>
+                                    <div class="box"><span>A</span></div>
+                                    <div class="box"><span>A</span></div>
+                                </div>
+                                <div class="timestamps">
+                                    <div class="timestamp">0</div>
+                                    <div class="timestamp">1</div>
+                                    <div class="timestamp">4</div>
+                                    <div class="timestamp">5</div>
+                                    <div class="timestamp">8</div>
+                                </div>
+                            </div> -->
+
+
+                        </div>
+
+                    </div>
+                    
+                </div>
+
+            </div>
+        </div>
+        
+        
+    </div>
+    
+    <footer class="footer">
+
+        <div class="links">
+            <ion-icon name="logo-github" class="icon"></ion-icon>
+            <a href="https://github.com/The-UrvishPatel/OS-CPU_Scheduling_Algorithms">Github - @The-UrvishPatel</a>
+        </div>
+
+        <p>© 2023 - Urvish Patel</p>
+        
+        <div class="links">
+            <ion-icon name="logo-twitter" style="color: rgb(0, 191, 255);"></ion-icon>
+            <a href="https://twitter.com/Urvuuu">Twitter - @Urvuuu</a>
+        </div>
+        
+    </footer>
+    
+
+    <!-- axios -->
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+      integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    >
+    </script>
+
+    <script src="logic.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+</body>
+</html>
