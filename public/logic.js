@@ -99,7 +99,7 @@ formDOM.addEventListener("submit", async (event) => {
 
     let pids = pid.split(',')
 
-    for(let i=0;i<pids.length;i++)
+    for(let i=1;i<pids.length;i++)
     {
       let row = document.createElement('tr')
       row.className = pids[i]
@@ -153,7 +153,7 @@ formDOM.addEventListener("submit", async (event) => {
     let cl = Object.keys(gc).length
     
 
-    for(let i=1;i<=cl;i++)
+    for(let i=0;i<=cl;i++)
     {
       let chartline = document.createElement('div')
       chartline.className = "chartline"
@@ -219,12 +219,6 @@ downloadBtn.addEventListener("click", () => {
   const toDownload = document.querySelector('body');
 
   html2canvas(toDownload,{
-    
-    allowTaint: true,
-    useCORS: true,
-    scale: 5,
-    windowWidth: 2000,   // Set the desired width of the window
-    windowHeight: 500,
 
   }).then(function (canvas) {
 
