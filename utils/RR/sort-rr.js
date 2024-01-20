@@ -1,9 +1,9 @@
-const sortPriority = (data,flag) => {
+const sortPriority = (data) => {
 
     let totalProcess = data.length
     let pass = totalProcess
     
-    while(pass-- && flag) 
+    while(pass--) 
     {
         for(let j=0;j<totalProcess;j++)
         {
